@@ -47,8 +47,8 @@ public class LinkedList{
             this.tail = node;
         }
         else{
-            // node.next = this.head;
-            // this.head = node;
+            tail.next = node;
+            tail = node;
         }
         this.sizeofLL++;
     }
@@ -58,14 +58,20 @@ public class LinkedList{
     }
     //Add at given index
     private void addAtNode(Node node, int idx){
-        if(idx <= this.sizeofLL){
-            Node head = this.head;
-            for(int i=0; i<idx; i++){
-                head = head.next;
-            }
-            node.next = head.next;
-            head.next = node;
+        if(idx < 0 || idx > this.sizeofLL){
+            //
         }
+        if(idx == 0)
+            addFirstNode(node);
+        else if(idx == this.sizeofLL)
+            addLastNode(node);
+        else{
+            Node prev = getNodeAt(idx-1);
+            Node forw = prev.next;
+            prev.next = node;
+            node.next = forw;
+            this.sizeofLL++;
+        }     
     }
     public void addAt(int data, int idx){
         Node node = new Node(data);
@@ -75,14 +81,13 @@ public class LinkedList{
     //remove first
     private void removeFirstNode throws Exception(){
         EmptyException();
-        this.head = this.head.next;
-    }
-    public void removeFirst(){
-        removeFirstNode();
-    }
-    private void removeFirstNode throws Exception(){
-        EmptyException();
-        this.head = this.head.next;
+        if (this.size == 1) {
+            this.head = this.tail = null;
+        }
+        else{
+            this.head = this.head.next;
+        }
+        this.sizeofLL--;
     }
     public void removeFirst(){
         removeFirstNode();
