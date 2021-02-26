@@ -47,8 +47,8 @@ public class LinkedList{
             this.tail = node;
         }
         else{
-            tail.next = node;
-            tail = node;
+            this.tail.next = node;
+            this.tail = node;
         }
         this.sizeofLL++;
     }
@@ -81,7 +81,7 @@ public class LinkedList{
     //remove first
     private void removeFirstNode throws Exception(){
         EmptyException();
-        if (this.size == 1) {
+        if (this.sizeofLL == 1) {
             this.head = this.tail = null;
         }
         else{
@@ -92,6 +92,64 @@ public class LinkedList{
     public void removeFirst(){
         removeFirstNode();
     }
-    
+    //remove last
+    private void removeLastNode throws Exception(){
+        EmptyException();
+        if (this.sizeofLL == 1) {
+            this.head = this.tail = null;
+        }
+        else{
+            Node prev = this.head;
+            for(int i=0; i<this.sizeofLL-2;i++){
+                prev = prev.next;
+            }
+            prev.next = null;
+            this.tail = prev;
+        }
+        this.sizeofLL--;
+    }
+    public void removeLast(){
+        removeLastNode();
+    }
+    //remove at given index
+    public void removeAt(int idx) {
+        if(idx < 0 || idx >= size){
+            System.out.println("Invalid arguments");
+            return;
+        }    
+        else if(size == 0){
+            System.out.println("List is empty");
+            return;
+        }    
+        else if(size == 1){
+            head = tail = null;
+            size--;
+        }    
+        if(idx == 0){
+            removeFirst(); 
+        }    
+        else if(idx == size-1){
+            removeLast();
+        }
+        else{
+            Node prev = head;
+            for(int i=0; i<idx-1; i++){
+                prev = prev.next;
+            }
+            Node node = prev.next;
+            prev.next = node.next;
+            size--;
+        }
+
+        //DISPLAY===========================================
+        public void display(){
+            Node node = this.head;
+            for(int i=0; i<this.sizeofLL; i++){
+                System.out.print(node.data + " ");
+                node = node.next;
+            }
+            System.out.println();
+        }
+    }
 
 }
