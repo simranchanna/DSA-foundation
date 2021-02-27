@@ -51,7 +51,7 @@ public class LinkedList{
         return curr;
     }
     public int getAt(int idx) throws Exception {
-        IndexOutOfBoundSizeInclusive(idx);
+        indexOutOfBoundSizeInclusive(idx);
         Node node = getNodeAt(idx);
         return node.data;
     }
@@ -102,7 +102,7 @@ public class LinkedList{
             this.sizeofLL++;
         }     
     }
-    public void addAt throws Exception(int idx, int data){
+    public void addAt(int idx, int data) throws Exception{
         indexOutOfBoundSizeExclusive(idx);
         Node node = new Node(data);
         addAtNode(idx, node);
@@ -122,7 +122,7 @@ public class LinkedList{
         this.sizeofLL--;
         return node;
     }
-    public int removeFirst throws Exception(){
+    public int removeFirst() throws Exception{
         EmptyException();
         Node node = removeFirstNode();
         return node.data;
@@ -144,30 +144,31 @@ public class LinkedList{
         this.sizeofLL--;
         return node;
     }
-    public int removeLast throws Exception(){
+    public int removeLast() throws Exception{
         EmptyException();
         Node node = removeLastNode();
         return node.data;
     }
     //remove at given index
     private Node removeAtNode(int idx){
+        Node curr = null;
         if(idx == 0){
-            removeFirst(); 
+            curr = removeFirstNode(); 
         }    
         else if(idx == this.sizeofLL-1){
-            removeLast();
+            curr = removeLastNode();
         }
         else{
             Node prev = getNodeAt(idx-1);
-            Node curr = prev.next;
+            curr = prev.next;
             Node forw = curr.next;
             prev.next = forw;
             curr.next = null;
             this.sizeofLL--;
-            return curr;
         }
+        return curr;
     }
-    public void removeAt throws Exception(int idx) {
+    public int removeAt(int idx) throws Exception{
         indexOutOfBoundSizeInclusive(idx);
         EmptyException();   
         Node node = removeAtNode(idx);
@@ -182,6 +183,16 @@ public class LinkedList{
             node = node.next;
         }
         System.out.println();
+    }
+    //MID OF LIST=======================================
+    public int mid(){
+        Node slow = this.head;
+        Node fast = this.head;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow.data;
     }
 
 }
