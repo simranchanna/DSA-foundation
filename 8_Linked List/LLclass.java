@@ -11,10 +11,10 @@ public class LinkedList{
     private int sizeofLL = 0;
 
     public int size(){
-        return sizeofLL;
+        return this.sizeofLL;
     }
     public boolean isEmpty(){
-        return sizeofLL == 0;
+        return this.sizeofLL == 0;
     }
 
     //Exception handling
@@ -22,6 +22,38 @@ public class LinkedList{
         if(this.sizeofLL == 0){
             throw new Exception("Linked List is empty!!!");
         }
+    }
+    public void indexOutOfBoundSizeInclusive(int idx) throws Exception{
+        if(idx < 0 || idx >= this.sizeofLL){
+            throw new Exception("Index out of bound : -1");
+        }
+    }
+    public void indexOutOfBoundSizeExclusive(int idx) throws Exception{
+        if(idx < 0 || idx > this.sizeofLL){
+            throw new Exception("Index out of bound : -1");
+        }
+    }
+    //GETTING A NODE==========================================================
+    public int getFirst() throws Exception {
+        EmptyException();
+        return this.head.data;
+    }
+    public int getLast() throws Exception {
+        EmptyException();
+        return this.tail.data;
+    }
+
+    private Node getNodeAt(int idx) {
+        Node curr = this.head;
+        for(int i=0; i<idx; i++){
+            curr = curr.next;
+        }
+        return curr;
+    }
+    public int getAt(int idx) throws Exception {
+        IndexOutOfBoundSizeInclusive(idx);
+        Node node = getNodeAt(idx);
+        return node.data;
     }
     //ADDING A NODE===========================================================
     //Add first
@@ -57,10 +89,7 @@ public class LinkedList{
         addLastNode(node);
     }
     //Add at given index
-    private void addAtNode(Node node, int idx){
-        if(idx < 0 || idx > this.sizeofLL){
-            //
-        }
+    private void addAtNode(int idx, Node node){
         if(idx == 0)
             addFirstNode(node);
         else if(idx == this.sizeofLL)
@@ -73,28 +102,34 @@ public class LinkedList{
             this.sizeofLL++;
         }     
     }
-    public void addAt(int data, int idx){
+    public void addAt throws Exception(int idx, int data){
+        indexOutOfBoundSizeExclusive(idx);
         Node node = new Node(data);
-        addAtNode(node, idx);
+        addAtNode(idx, node);
     }
     //REMOVING A NODE============================================
     //remove first
-    private void removeFirstNode throws Exception(){
-        EmptyException();
+    private Node removeFirstNode(){
+        Node node = this.head;
         if (this.sizeofLL == 1) {
             this.head = this.tail = null;
         }
         else{
-            this.head = this.head.next;
+            Node forw = this.head.next;
+            node.next = null;
+            this.head = forw;
         }
         this.sizeofLL--;
+        return node;
     }
-    public void removeFirst(){
-        removeFirstNode();
+    public int removeFirst throws Exception(){
+        EmptyException();
+        Node node = removeFirstNode();
+        return node.data;
     }
     //remove last
-    private void removeLastNode throws Exception(){
-        EmptyException();
+    private Node removeLastNode(){
+        Node node = this.tail;
         if (this.sizeofLL == 1) {
             this.head = this.tail = null;
         }
@@ -107,49 +142,46 @@ public class LinkedList{
             this.tail = prev;
         }
         this.sizeofLL--;
+        return node;
     }
-    public void removeLast(){
-        removeLastNode();
+    public int removeLast throws Exception(){
+        EmptyException();
+        Node node = removeLastNode();
+        return node.data;
     }
     //remove at given index
-    public void removeAt(int idx) {
-        if(idx < 0 || idx >= size){
-            System.out.println("Invalid arguments");
-            return;
-        }    
-        else if(size == 0){
-            System.out.println("List is empty");
-            return;
-        }    
-        else if(size == 1){
-            head = tail = null;
-            size--;
-        }    
+    private Node removeAtNode(int idx){
         if(idx == 0){
             removeFirst(); 
         }    
-        else if(idx == size-1){
+        else if(idx == this.sizeofLL-1){
             removeLast();
         }
         else{
-            Node prev = head;
-            for(int i=0; i<idx-1; i++){
-                prev = prev.next;
-            }
-            Node node = prev.next;
-            prev.next = node.next;
-            size--;
+            Node prev = getNodeAt(idx-1);
+            Node curr = prev.next;
+            Node forw = curr.next;
+            prev.next = forw;
+            curr.next = null;
+            this.sizeofLL--;
+            return curr;
         }
+    }
+    public void removeAt throws Exception(int idx) {
+        indexOutOfBoundSizeInclusive(idx);
+        EmptyException();   
+        Node node = removeAtNode(idx);
+        return node.data;    
+    }
 
-        //DISPLAY===========================================
-        public void display(){
-            Node node = this.head;
-            for(int i=0; i<this.sizeofLL; i++){
-                System.out.print(node.data + " ");
-                node = node.next;
-            }
-            System.out.println();
+    //DISPLAY===========================================
+    public void display(){
+        Node node = this.head;
+        for(int i=0; i<this.sizeofLL; i++){
+            System.out.print(node.data + " ");
+            node = node.next;
         }
+        System.out.println();
     }
 
 }
