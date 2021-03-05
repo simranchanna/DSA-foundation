@@ -177,10 +177,10 @@ public class LinkedList{
 
     //DISPLAY===========================================
     public void display(){
-        Node node = this.head;
-        for(int i=0; i<this.sizeofLL; i++){
-            System.out.print(node.data + " ");
-            node = node.next;
+        Node curr = this.head;
+        while(curr != null){
+            System.out.print(curr.data + " ");
+            curr = curr.next;
         }
         System.out.println();
     }
