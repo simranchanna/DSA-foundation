@@ -3,7 +3,43 @@ import java.util.LinkedList;
 public class client {
 
     public static void main(String[] args) throws Exception{
-    LinkedList list = new LinkedList();
+        LinkedList list = new LinkedList();
+        //Scanner scn = new Scanner(System.in);
+        // System.out.println("Enter your choice : ");
+        // System.out.println("0. Exit");
+        // System.out.println("1. Add First");
+        // System.out.println("2. Add Last");
+        // System.out.println("3. Add At Index");
+        // System.out.println("4. Remove First");
+        // System.out.println("5. Remove Last");
+        // System.out.println("6. Remove At Index");
+        // System.out.println("7. Get First");
+        // System.out.println("8. Get Last");
+        // System.out.println("9. Get At Index");
+        // System.out.println("10. Display the list");
+        // System.out.println("11. Get Mid");
+        // int c = scn.nextInt();
+        // while(c != 0){
+        //     switch(c){
+        //         case 1:
+        //             System.out.print("Enter the element : ");
+        //             int x = scn.nextInt();
+        //             list.addFirst(x);
+        //             break;
+        //         case 2:
+        //             System.out.print("Enter the element : ");
+        //             int x = scn.nextInt();
+        //             list.addLast(x);
+        //             break;    
+        //         case 10:
+        //             list.display();
+        //             break;    
+        //         default:
+        //             System.out.println("Invalid Input!!"); 
+        //             break;   
+        //     }
+        //     c = scn.nextInt();
+        // }
     list.addFirst(10); 
     list.addLast(20);
     list.addAt(2,30);
