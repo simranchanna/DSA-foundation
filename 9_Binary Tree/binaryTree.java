@@ -48,10 +48,42 @@ public class binaryTree {
     //HEIGHT OF BINARY TREE
     public static int height(Node root){
         if(root == null)
-            return 0;
-        int leftHeight = size(root.left); 
-        int rightHeight = size(root.right);
+            return -1;
+        int leftHeight = height(root.left); 
+        int rightHeight = height(root.right);
         return Math.max(leftHeight, rightHeight) + 1;   
+    }
+    public static int heightInTermsOfNode(Node root){
+        if(root == null)
+            return 0;
+        int leftHeight = heightInTermsOfNode(root.left); 
+        int rightHeight = heightInTermsOfNode(root.right);
+        return Math.max(leftHeight, rightHeight) + 1;   
+    }
+
+    //MAXIMUM OF BINARY TREE
+    public static int maximum(Node root){
+        if(root == null)
+            return Integer.MIN_VALUE;
+        int lmax = maximum(root.left); 
+        int rmax = maximum(root.right);
+        return Math.max(Math.max(lmax, rmax) , root.data);   
+    }
+
+    //SUM OF NODES OF BINARY TREE
+    public static int sum(Node root){
+        if(root == null)
+            return 0;
+        int leftSum = sum(root.left); 
+        int rightSum = sum(root.right);
+        return leftSum + rightSum + root.data;
+    }
+
+    public static boolean findData(Node root, int data){
+        if(root == null)
+            return false;
+        boolean res = root.data == data;
+        return res || findData(root.left, data) || findData(root.right, data);   
     }
 
 }
