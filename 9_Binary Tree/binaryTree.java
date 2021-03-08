@@ -86,4 +86,18 @@ public class binaryTree {
         return res || findData(root.left, data) || findData(root.right, data);   
     }
 
+    public static boolean nodeToRootHelper(Node root, int data, ArrayList<Integer> ans){
+        if(root == null)
+            return false;
+        boolean res = root.data == data || nodeToRootHelper(root.left, data, ans) || nodeToRootHelper(root.right, data, ans);
+        if(res)
+            ans.add(root.data);
+        return res;       
+    }
+    public static ArrayList<Integer> nodeToRootPath(Node root, int data){
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        nodeToRootHelper(root, data, ans);
+        return ans;
+    }
+
 }
