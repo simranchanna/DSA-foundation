@@ -62,7 +62,8 @@ public class BSTclass {
     public static boolean find(Node node, int data){
         while(node != null){
             if(node.data == data)
-                return true;
+
+            return true;
             else if(node.data > data)
                 node = node.left;
             else
@@ -71,21 +72,30 @@ public class BSTclass {
         return false;
     }
 
-    public static Node add(Node node, int data) {
-        Node curr = node;  
-        while(curr.left != null || curr.right != null){
-            if(curr.data > data)
-                curr = curr.left;
-            else
-                curr = curr.right;        
-        }
-        if(curr.data == data)
-            return node;
-        Node mynode = new Node(data, null, null);
-        if(curr.data > data)
-            curr.left = mynode;
+    public static Node addNode(Node node, int data) {
+        if(node == null)
+            return new Node(data);
+        if(node.data > data)
+            node.left = addNode(node.left, data);
         else
-            curr.right = mynode;
+            node.right = addNode(node.right, data);
+        return node;            
+    }
+
+    public static Node removeNode(Node node, int data){
+        if(node == null) 
+            return null;
+        if(node.data < data)
+            node.right = removeNode(node.right, data);
+        else if(node.data > data)
+            node.left = removeNode(node.left, data);
+        else{
+            if(node.left == null || node.right == null)
+                return node.left != null ? node.left : node.right;
+            int maxdata = maximum(node.left);
+            node.data = maxdata;
+            node.left = removeNode(node.left, maxdata);   
+        }            
         return node;
     }
 
