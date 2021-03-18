@@ -152,7 +152,7 @@ public class Main {
         return curr;
     }
 
-    public static void linearize(Node node){
+    public static void linearize(Node node){       //complexity O(n^2)
         for(Node child : node.children){
             linearize(child);
         }
@@ -162,6 +162,22 @@ public class Main {
             node.children.remove(i+1);
         }
     }
+
+    public static Node linearize_btr(Node node){     //better approach O(n)
+      ArrayList<Node> tails = new ArrayList<Node>();
+      for(Node child : node.children){
+          Node t = linearize_btr(child);
+          tails.add(t);
+      }
+      for(int i=node.children.size()-2; i>=0; i--){
+          Node tail = tails.get(i);
+          tail.children.add(node.children.get(i+1));
+          node.children.remove(i+1);
+      }
+      if(tails.size() == 0)
+          return node;
+      return tails.get(tails.size()-1);     
+  }
     //ENDING OF ANSWER
 
   public static void main(String[] args) throws Exception {

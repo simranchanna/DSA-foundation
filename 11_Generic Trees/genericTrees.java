@@ -47,18 +47,14 @@ public class genericTrees {
 
     public static void display(Node node){
         System.out.print(node.data + " -> ");
-        if(node.children.size() == 0){
-            System.out.println(".");
-            return;
-        }
         for(Node child : node.children){
             System.out.print(child.data + ",");
         }
-        System.out.println();
+        System.out.println(".");
         for(Node child : node.children){
             display(child);
         }
-        
+
     }
 
     public static ArrayList<Integer> nodeToRootPath(Node node, int data){
