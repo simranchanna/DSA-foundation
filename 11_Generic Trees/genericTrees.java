@@ -45,6 +45,10 @@ public class genericTrees {
         return false;    
     }
 
+    public static void display(Node node){
+        
+    }
+
     public static ArrayList<Integer> nodeToRootPath(Node node, int data){
         ArrayList<Integer> list = new ArrayList<Integer>();
         if(node.data == data){
@@ -60,5 +64,35 @@ public class genericTrees {
         }
         return list;
     }
+
+    public static int lca(Node node, int d1, int d2) {
+        ArrayList<Integer> list1 = nodeToRootPath(node, d1);
+        ArrayList<Integer> list2 = nodeToRootPath(node, d2);
+        int i = list1.size() - 1;
+        int j = list2.size() - 1;  
+        while(i>=0 && j>=0 && list1.get(i) == list2.get(j)){
+            j--;
+            i--;
+        }
+        j++;
+        i++;
+        return list1.get(i);
+    }
+
+    public static int distanceBetweenNodes(Node node, int d1, int d2){
+        ArrayList<Integer> list1 = nodeToRootPath(node, d1);
+        ArrayList<Integer> list2 = nodeToRootPath(node, d2);
+        int i = list1.size() - 1;
+        int j = list2.size() - 1;  
+        int common = 0;
+        while(i >= 0 && j >= 0 && list1.get(i) == list2.get(j)){
+            common++;
+            i--;
+            j--;
+        }
+        int ans = list1.size() + list2.size() - (2 * common);
+        return ans;
+    }
+   
 
 }
