@@ -5,6 +5,7 @@ public class client {
             st.push(i*10);
         }
         System.out.println(st.top());
+        st.pop();
         st.display();
         System.out.println(st.size());
         dynamicStack dst = new dynamicStack(5);
