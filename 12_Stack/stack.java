@@ -5,18 +5,17 @@ public class stack {
     protected int tos = -1;
 
     //CONSTRUCTOR====================
-    protected void initializeVars(){
+    protected void initializeVars(int capacity){
+        this.capacity = capacity;
         this.arr = new int[this.capacity];
         this.elementCount = 0;
         this.tos = -1;
     }
     public stack(){
-        this.capacity = 10;
-        initializeVars();
+        initializeVars(10);
     }
     public stack(int size){
-        this.capacity = size;
-        initializeVars();
+        initializeVars(size);
     }
 
     //BASIC FUNCTIONS====================
@@ -25,6 +24,13 @@ public class stack {
     }
     public boolean isEmpty(){
         return this.elementCount == 0;
+    }
+    public void display(){
+        int i = 0;
+        while(i <= tos){
+            System.out.println(this.arr[i]);
+            i++;
+        }
     }
 
     //EXCEPTIONS====================
@@ -38,11 +44,13 @@ public class stack {
     }
 
     //STACK FUNCTIONS====================
+    protected void push_(int data){
+        this.arr[++this.tos] = data;
+        this.elementCount++;   
+    }
     public void push(int data) throws Exception{
         overflow();
-        this.arr[++this.tos] = data;
-        this.elementCount++;
-        
+        push_(data);
     }
     public int top() throws Exception{
         underflow();
