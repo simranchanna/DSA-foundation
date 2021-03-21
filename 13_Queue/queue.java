@@ -10,12 +10,13 @@ public class queue {
         this.capacity = capacity;
         this.arr = new int[this.capacity];
         this.elementCount = 0;
-        this.tos = -1;
+        this.front = 0;
+        this.back = 0;
     }
-    public stack(){
+    public queue(){
         initializeVars(10);
     }
-    public stack(int size){
+    public queue(int size){
         initializeVars(size);
     }
 
@@ -26,6 +27,7 @@ public class queue {
     public boolean isEmpty(){
         return this.elementCount == 0;
     }
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -33,6 +35,8 @@ public class queue {
         for(int i=0; i<this.elementCount; i++){
             int idx = (this.front + i) % this.capacity;
             sb.append(this.arr[idx]);
+            if(i != this.elementCount-1)
+                sb.append(", ");
         }
         sb.append("]");
         return sb.toString();
@@ -41,31 +45,36 @@ public class queue {
     //EXCEPTIONS====================
     private void overflow() throws Exception{
         if(this.capacity == this.elementCount)
-            throw new Exception("Stack is Full");
+            throw new Exception("Queue is Full");
     }
     private void underflow() throws Exception{
         if(this.elementCount == 0)
-            throw new Exception("Stack is Empty");
+            throw new Exception("Queue is Empty");
     }
 
-    //STACK FUNCTIONS====================
+    //QUEUE FUNCTIONS====================
     protected void push_(int data){
-        this.arr[++this.tos] = data;
+        this.arr[this.back] = data;
         this.elementCount++;   
+        this.back = (this.back + 1) % this.capacity;
     }
     public void push(int data) throws Exception{
         overflow();
         push_(data);
     }
-    public int top() throws Exception{
+    public int front() throws Exception{
         underflow();
-        return this.arr[this.tos];
+        return this.arr[this.front];
     }
-    public int pop() throws Exception{
-        underflow();
+    protected int pop_(){
         int rv = this.arr[this.front];
         this.arr[this.front] = 0;
         this.elementCount--;
+        this.front = (this.front + 1) % this.capacity;
         return rv;
+    }
+    public int pop() throws Exception{
+        underflow();
+        return pop_();
     }
 }
