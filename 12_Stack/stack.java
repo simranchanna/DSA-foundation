@@ -25,12 +25,18 @@ public class stack {
     public boolean isEmpty(){
         return this.elementCount == 0;
     }
-    public void display(){
-        int i = 0;
-        while(i <= tos){
-            System.out.println(this.arr[i]);
-            i++;
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i=0; i<this.elementCount; i++){
+            sb.append(this.arr[i]);
+            if(i != this.elementCount-1)
+                sb.append(", ");
         }
+        sb.append("]");
+        return sb.toString();
     }
 
     //EXCEPTIONS====================

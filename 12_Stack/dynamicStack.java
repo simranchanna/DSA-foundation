@@ -9,8 +9,7 @@ public class dynamicStack extends stack {
     }
 
     public dynamicStack(int[] arr) {
-        super.initializeVars(arr.length);
-
+        super.initializeVars(2 * arr.length);
         for (int ele : arr)
             super.push_(ele);
     }
@@ -23,7 +22,6 @@ public class dynamicStack extends stack {
             for (int ele : temp) // copy old data in new space.
                 super.push_(ele);
         }
-
         super.push_(data);
     }
 
