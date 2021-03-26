@@ -14,14 +14,14 @@ public class queueUsingStack_push {
     }
 
     //O(1)
-    public void push(int data){
+    public void add(int data){
         if(st.isEmpty())
             topVal = data;
         st.push(data);    
     }
 
     //O(1)
-    public int front(){
+    public int peek(){
         return topVal;
     }
 
@@ -32,11 +32,11 @@ public class queueUsingStack_push {
         }
     }
 
-    public int pop(){
+    public int remove(){
         transferToAnotherStack();
         int rData = temp.pop();
         while (temp.size() != 0) {
-            this.push(temp.pop());
+            this.add(temp.pop());
         }
         return rData;
     }
