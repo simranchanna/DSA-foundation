@@ -3,7 +3,6 @@ import java.util.Stack;
 public class queueUsingStack_pop {
     Stack<Integer> st = new Stack<>();
     Stack<Integer> temp = new Stack<>();
-    int topVal = 0;
 
     public int size(){
         return st.size();

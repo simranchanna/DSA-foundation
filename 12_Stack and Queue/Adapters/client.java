@@ -10,13 +10,22 @@ public class client {
     //     que.remove();
     // }
     // }
-    queueUsingStack_pop que = new queueUsingStack_pop();
-    for(int i=1; i<=10; i++){
-        que.add(i*10);
+    // queueUsingStack_pop que = new queueUsingStack_pop();
+    // for(int i=1; i<=10; i++){
+    //     que.add(i*10);
+    // }
+    // for(int i=0; i<5; i++){
+    //     System.out.println(que.peek());
+    //     que.remove();
+    // }
+    stackUsingQueue_push st = new stackUsingQueue_push();
+    for(int i=1; i<10; i++){
+        st.push(i*10);
     }
     for(int i=0; i<5; i++){
-        System.out.println(que.peek());
-        que.remove();
+        System.out.println(st.peek());
+        st.pop();
     }
+
     }
 }
