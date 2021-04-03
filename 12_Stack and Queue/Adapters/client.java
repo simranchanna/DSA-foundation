@@ -18,10 +18,19 @@ public class client {
     //     System.out.println(que.peek());
     //     que.remove();
     // }
-    stackUsingQueue_push st = new stackUsingQueue_push();
+    // stackUsingQueue_push st = new stackUsingQueue_push();
+    // for(int i=1; i<10; i++){
+    //     st.push(i*10);
+    // }
+    // for(int i=0; i<5; i++){
+    //     System.out.println(st.peek());
+    //     st.pop();
+    // }
+    stackUsingQueue_pop st = new stackUsingQueue_pop();
     for(int i=1; i<10; i++){
         st.push(i*10);
     }
+    System.out.println(st.size());
     for(int i=0; i<5; i++){
         System.out.println(st.peek());
         st.pop();
