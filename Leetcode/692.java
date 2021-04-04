@@ -4,7 +4,10 @@ class Solution {
         for(String ele : words)
             map.put(ele, map.getOrDefault(ele, 0) + 1);
         PriorityQueue<String> pq = new PriorityQueue<>((a, b) -> {
-            return map.get(a) - map.get(b);
+            if(map.get(a) == map.get(b))
+                return b.compareTo(a);
+            else
+                return map.get(a) - map.get(b); 
         });
         for(String e : map.keySet()){
             pq.add(e);
@@ -14,6 +17,12 @@ class Solution {
         while(pq.size() != 0){
             ans.add(pq.remove());
         }
+        Collections.sort(ans, (a, b) -> {
+            if(map.get(a) == map.get(b))
+                return a.compareTo(b);
+            else
+                return map.get(b) - map.get(a);    
+        });
         return ans;
     }
 }
