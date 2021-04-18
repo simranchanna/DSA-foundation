@@ -28,6 +28,21 @@ public class graph {
         }
     }
 
+    public static boolean hasPath(int src, int dest, boolean[] vis) {
+        if (src == dest) {
+            return true;
+        }
+
+        boolean res = false;
+        vis[src] = true;
+        for (Edge e : graph[src]) {
+            if (!vis[e.v])
+                res = res || hasPath(e.v, dest, vis);
+        }
+
+        return res;
+    }
+
     public static void main(String[] args){
         for(int i=0; i<7; i++)
             graph[i] = new ArrayList<>();
@@ -40,6 +55,8 @@ public class graph {
         addEdge(4,6,8);
         addEdge(5,6,3);
 
-        display();
+        boolean[] vis = new boolean[7];
+        System.out.println(hasPath(0,6,vis));
+        //display();
     }
 }
