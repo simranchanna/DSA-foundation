@@ -20,9 +20,9 @@ public class Solution {
         return size + 1;
     }
 
-    public static int journeyToMoon(int n, int[][] astronaut) {
+    public static long journeyToMoon(int n, int[][] astronaut) {
         ArrayList<Integer>[] graph = new ArrayList[n];
-        int count = 0;
+        long count = 0;
         for (int i = 0; i < n; i++)
             graph[i] = new ArrayList<>();
 
@@ -37,10 +37,11 @@ public class Solution {
             if (!vis[i])
                 sizeArray.add(moonDFS(graph, i, vis));
         }
-        for(int i=0; i<sizeArray.size()-1; i++){
-            for(int j=i+1; j<sizeArray.size(); j++){
-                count += sizeArray.get(i) * sizeArray.get(j);
-            }
+        long ssf = 0;
+        for(int i=0; i<sizeArray.size(); i++){
+            int ele = sizeArray.get(i);
+            count += ssf * ele;
+            ssf += ele;
         }
         return count; 
 
@@ -69,7 +70,7 @@ public class Solution {
             }
         }
 
-        int result = journeyToMoon(n, astronaut);
+        long result = journeyToMoon(n, astronaut);
 
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
