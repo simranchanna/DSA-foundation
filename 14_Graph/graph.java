@@ -18,6 +18,33 @@ public class graph {
         graph[v].add(new Edge(u, w));
     }
 
+    public static int findEdge(int u, int v){
+        for(int i=0; i < graph[u].size(); i++){
+            Edge e = graph[u].get(i);
+            if(e.v == v)
+                return i;
+        }
+        return -1;
+    }
+
+    public static void removeEdge(int u, int v){
+        int idx1 = findEdge(u, v);
+        if(idx1 == -1)
+            return;
+        int idx2 = findEdge(v, u);
+        graph[u].remove(idx1);
+        graph[v].remove(idx2);
+    }
+
+    public static void removeVertex(int u){
+        int n = graph[u].size();
+        while(n != 0){
+            Edge e = graph[u].get(n-1);
+            removeEdge(u, e.v);
+            n--;
+        }
+    }
+
     public static void display(){
         for(int i=0; i<7; i++){
             StringBuilder sb = new StringBuilder();
@@ -29,17 +56,14 @@ public class graph {
     }
 
     public static boolean hasPath(int src, int dest, boolean[] vis) {
-        if (src == dest) {
+        if (src == dest)
             return true;
-        }
-
         boolean res = false;
         vis[src] = true;
         for (Edge e : graph[src]) {
             if (!vis[e.v])
                 res = res || hasPath(e.v, dest, vis);
         }
-
         return res;
     }
 
@@ -55,8 +79,11 @@ public class graph {
         addEdge(4,6,8);
         addEdge(5,6,3);
 
-        boolean[] vis = new boolean[7];
-        System.out.println(hasPath(0,6,vis));
+        // boolean[] vis = new boolean[7];
+        // System.out.println(hasPath(0,6,vis));
         //display();
+        //removeEdge(3, 4);
+        removeVertex(2);
+        display();
     }
 }
