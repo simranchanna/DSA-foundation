@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class floodfill {
 
     public static void main(String[] args) throws Exception {
         Scanner scn = new Scanner(System.in);
@@ -14,10 +14,12 @@ public class Main {
                 maze[i][j] = scn.nextInt();
             }
         }
-        floodfill(maze, 0, 0, "", visited);
+        int[][] dir = {{-1,-1}, {}, {}, {}, {}, {}, {}, {}};
+        char[] moves = {'t', 'e', 'r', 's', 'd', 'w', 'l', 'n'};
+        floodfill(maze, 0, 0, "", visited, moves);
     }
 
-    public static void floodfill(int[][] maze, int row, int col, String psf, boolean[][] visited) {
+    public static void floodfill(int[][] maze, int row, int col, String psf, boolean[][] visited, char[] moves) {
         int n = maze.length;
         int m = maze[0].length;
         //base case
@@ -27,6 +29,7 @@ public class Main {
         }
 
         visited[row][col] = true;
+        for(int i=0; i<moves.length)
         //top move
         if (row > 0) {
             if (!visited[row - 1][col] && maze[row - 1][col] == 0) {
@@ -40,6 +43,30 @@ public class Main {
             }
         }
         //down move
+        if (row < n - 1) {
+            if (!visited[row + 1][col] && maze[row + 1][col] == 0) {
+                floodfill(maze, row + 1, col, psf + "d", visited);
+            }
+        }
+        //right move
+        if (col < m - 1) {
+            if (!visited[row][col + 1] && maze[row][col + 1] == 0) {
+                floodfill(maze, row, col + 1, psf + "r", visited);
+            }
+        }
+        //north move
+        if (row > 0) {
+            if (!visited[row - 1][col] && maze[row - 1][col] == 0) {
+                floodfill(maze, row - 1, col, psf + "t", visited);
+            }
+        }
+        // move
+        if (col > 0) {
+            if (!visited[row][col - 1] && maze[row][col - 1] == 0) {
+                floodfill(maze, row, col - 1, psf + "l", visited);
+            }
+        }
+        // move
         if (row < n - 1) {
             if (!visited[row + 1][col] && maze[row + 1][col] == 0) {
                 floodfill(maze, row + 1, col, psf + "d", visited);
