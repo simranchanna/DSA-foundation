@@ -1,5 +1,5 @@
 class Solution {
-    public static int permute(int[] arr, boolean[] vis, int visited, List<Integer> ans, List<List<Integer>> list){
+    public static int permute(int[] arr, int visited, List<Integer> ans, List<List<Integer>> list){
         if(visited == arr.length){
             //System.out.println(ans);
             List<Integer> base = new ArrayList<>(ans);
@@ -9,14 +9,15 @@ class Solution {
         int count = 0;
         int prev = -12;
         for (int i = 0; i < arr.length; i++) {
-            if (!vis[i] && prev != arr[i]){
-                vis[i] = true;
-                ans.add(arr[i]);
-                count += permute(arr, vis, visited+1, ans, list);
+            if (arr[i] > -11 && prev != arr[i]){
+                int val = arr[i];
+                arr[i] = -11;
+                ans.add(val);
+                count += permute(arr, visited+1, ans, list);
                 ans.remove(ans.size()-1);
-                vis[i] = false;
+                arr[i] = val;
+                prev = arr[i];
             }
-            prev = arr[i];
         }
         return count;
     }
@@ -24,8 +25,7 @@ class Solution {
         Arrays.sort(nums);
         List<List<Integer>> list = new ArrayList<>();
         List<Integer> ans = new ArrayList<>();
-        boolean[] vis = new boolean[nums.length];
-        permute(nums, vis, 0, ans, list);
+        permute(nums, 0, ans, list);
         return list;
     }
 }
