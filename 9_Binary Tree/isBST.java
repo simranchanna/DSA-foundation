@@ -99,7 +99,7 @@ public class Main {
     boolean left = isBST(root.left);    
     if(!left)
         return false;
-    if(prev != null && prev.data > root.data) 
+    if(prev != null && prev.data >= root.data) 
         return false;
     prev = root;    
     boolean right = isBST(root.right);  
